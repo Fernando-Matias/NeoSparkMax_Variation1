@@ -12,9 +12,14 @@ import edu.wpi.first.wpilibj.PWMVictorSPX;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.Solenoid;
+
+import com.ctre.phoenix.motorcontrol.can.TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj.GenericHID.Hand;
 //import sun.security.krb5.internal.AuthContext;
+// import sun.security.jgss.spnego.SpNegoContext;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType; 
@@ -29,24 +34,48 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
  */
 
 public class Robot extends TimedRobot {
-  private static final int NeoShooter_ID = 1; 
+  //private static final int NeoShooter_ID = 1; 
+
+  private static final int FalconShooter_ID = 1;
 
   //private static final int kMotorPort = 0;
   private static final int kJoystickPort = 0;
   private XboxController m_Controller = new XboxController(2);
 
+  public static final int mPCM_B = 1;
+  public static final int Popout = 1;
+  public static final int Popin = 1;
+
+
+  public Solenoid PopoutHoodPopout, PopoutHoodPopin;
+
+  public static final int ShooterEXTENDED = 0;
+  public static final int ShooterRETRACTED = 1;
+  public static int Shooter_STATE = ShooterRETRACTED;
+
+
+
   //private SpeedController m_motor;
   private Joystick m_joystick;
   private CANSparkMax NeoShooter;
+
+  public WPI_TalonFX FalconShooter;
 
 
   @Override
   public void robotInit() {
     //m_motor = new PWMVictorSPX(kMotorPort);
     m_joystick = new Joystick(kJoystickPort);
-    NeoShooter = new CANSparkMax(NeoShooter_ID, MotorType.kBrushless);
+   // NeoShooter = new CANSparkMax(NeoShooter_ID, MotorType.kBrushless);
 
-    NeoShooter.restoreFactoryDefaults();
+   FalconShooter = new WPI_TalonFX(FalconShooter_ID);
+   PopoutHoodPopout = new Solenoid(mPCM_B, Popout);
+   PopoutHoodPopin = new Solenoid(mPCM_B, Popin);
+
+
+   // NeoShooter.restoreFactoryDefaults();
+
+
 
 
   }
@@ -55,18 +84,52 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     //m_motor.set(m_joystick.getY());
     //NeoShooter.set(m_joystick.getY());
-    boolean auto = m_Controller.getBButton();
-    boolean stop = m_Controller.getAButton();
+    boolean A = m_Controller.getAButton();
+    boolean stop = m_Controller.getBButton();
+    boolean X = m_Controller.getXButton();
+    boolean Y = m_Controller.getYButton();
+    boolean Start = m_Controller.getStartButton();
+/* 
+    public void ExtendTray() {
+      mTray_Extend.set(Constants.On);
+      mTray_Retract.set(Constants.Off);
+      Constants.TRAY_STATE = Constants.TRAY_STATE_EXTENDED;
+  }
+  public void RetractTray() {
+      mTray_Extend.set(Constants.Off);
+      mTray_Retract.set(Constants.On);
+      Constants.TRAY_STATE = Constants.TRAY_STATE_RETRACTED; 
+      */
+  
 
-    if (auto){
-      NeoShooter.set(1.0);
+    if (Start && Shooter_STATE == ShooterRETRACTED){
+      PopoutHoodPopout.set(true);
+      PopoutHoodPopin.set(false);
+      Shooter_STATE = ShooterEXTENDED;
     }
-    /* else{
+    if (Start && Shooter_STATE == ShooterEXTENDED){
+      PopoutHoodPopout.set(false);
+      PopoutHoodPopin.set(true);
+      Shooter_STATE = ShooterEXTENDED;
+    }
+    if (Y){
+      FalconShooter.set(1.0);
+    }
+    if(X){
+      FalconShooter.set(0.75);
+    }
+    if (A){
+      NeoShooter.set(0.5);
+    }
+     else{
       NeoShooter.set(0.0);
-    } */
+    } 
+
     if(stop){
-      NeoShooter.set(0.0);
-    }
+      FalconShooter.set(0.0);
+    } 
+    //FalconShooter.set(m_joystick.getY());
+    
 
   }
 }
