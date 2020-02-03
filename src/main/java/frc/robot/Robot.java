@@ -7,22 +7,22 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PWMVictorSPX;
-import edu.wpi.first.wpilibj.SpeedController;
+//import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.PWMVictorSPX;
+//import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.Solenoid;
+//import edu.wpi.first.wpilibj.Solenoid;
 
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
+//import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj.GenericHID.Hand;
+//import edu.wpi.first.wpilibj.GenericHID.Hand;
 //import sun.security.krb5.internal.AuthContext;
 // import sun.security.jgss.spnego.SpNegoContext;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType; 
+//import com.revrobotics.CANSparkMaxLowLevel.MotorType; 
 
 /**
  * This sample program shows how to control a motor using a joystick. In the
@@ -39,7 +39,7 @@ public class Robot extends TimedRobot {
   private static final int FalconShooter_ID = 1;
 
   //private static final int kMotorPort = 0;
-  private static final int kJoystickPort = 0;
+  //private static final int kJoystickPort = 0;
   private XboxController m_Controller = new XboxController(2);
 
   public static final int mPCM_B = 1;
@@ -47,16 +47,16 @@ public class Robot extends TimedRobot {
   public static final int Popin = 1;
 
 
-  public Solenoid PopoutHoodPopout, PopoutHoodPopin;
+  //public Solenoid PopoutHoodPopout, PopoutHoodPopin;
 
-  public static final int ShooterEXTENDED = 0;
-  public static final int ShooterRETRACTED = 1;
-  public static int Shooter_STATE = ShooterRETRACTED;
+  //public static final int ShooterEXTENDED = 0;
+  //public static final int ShooterRETRACTED = 1;
+  //public static int Shooter_STATE = ShooterRETRACTED;
 
 
 
   //private SpeedController m_motor;
-  private Joystick m_joystick;
+  //private Joystick m_joystick;
   private CANSparkMax NeoShooter;
 
   public WPI_TalonFX FalconShooter;
@@ -65,12 +65,12 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     //m_motor = new PWMVictorSPX(kMotorPort);
-    m_joystick = new Joystick(kJoystickPort);
+    //m_joystick = new Joystick(kJoystickPort);
    // NeoShooter = new CANSparkMax(NeoShooter_ID, MotorType.kBrushless);
 
    FalconShooter = new WPI_TalonFX(FalconShooter_ID);
-   PopoutHoodPopout = new Solenoid(mPCM_B, Popout);
-   PopoutHoodPopin = new Solenoid(mPCM_B, Popin);
+   //PopoutHoodPopout = new Solenoid(mPCM_B, Popout);
+   //PopoutHoodPopin = new Solenoid(mPCM_B, Popin);
 
 
    // NeoShooter.restoreFactoryDefaults();
@@ -86,9 +86,9 @@ public class Robot extends TimedRobot {
     //NeoShooter.set(m_joystick.getY());
     boolean A = m_Controller.getAButton();
     boolean stop = m_Controller.getBButton();
-    boolean X = m_Controller.getXButton();
-    boolean Y = m_Controller.getYButton();
-    boolean Start = m_Controller.getStartButton();
+    //boolean X = m_Controller.getXButton();
+    //boolean Y = m_Controller.getYButton();
+    //boolean Start = m_Controller.getStartButton();
 /* 
     public void ExtendTray() {
       mTray_Extend.set(Constants.On);
@@ -102,7 +102,7 @@ public class Robot extends TimedRobot {
       */
   
 
-    if (Start && Shooter_STATE == ShooterRETRACTED){
+/*     if (Start && Shooter_STATE == ShooterRETRACTED){
       PopoutHoodPopout.set(true);
       PopoutHoodPopin.set(false);
       Shooter_STATE = ShooterEXTENDED;
@@ -111,20 +111,20 @@ public class Robot extends TimedRobot {
       PopoutHoodPopout.set(false);
       PopoutHoodPopin.set(true);
       Shooter_STATE = ShooterEXTENDED;
-    }
-    if (Y){
+    } */
+/*     if (Y){
       FalconShooter.set(1.0);
     }
     if(X){
       FalconShooter.set(0.75);
-    }
+    } */
     if (A){
       NeoShooter.set(0.5);
     }
-     else{
+/*  else{
       NeoShooter.set(0.0);
     } 
-
+ */
     if(stop){
       FalconShooter.set(0.0);
     } 
