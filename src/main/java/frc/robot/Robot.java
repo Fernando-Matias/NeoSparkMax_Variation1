@@ -11,7 +11,11 @@ package frc.robot;
 //import edu.wpi.first.wpilibj.PWMVictorSPX;
 //import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.TimedRobot;
+<<<<<<< Updated upstream
 import edu.wpi.first.wpilibj.XboxController;
+=======
+//import edu.wpi.first.wpilibj.XboxController;
+>>>>>>> Stashed changes
 //import edu.wpi.first.wpilibj.Solenoid;
 
 //import com.ctre.phoenix.motorcontrol.can.TalonFX;
@@ -39,12 +43,19 @@ public class Robot extends TimedRobot {
   private static final int FalconShooter_ID = 1;
 
   //private static final int kMotorPort = 0;
+<<<<<<< Updated upstream
   //private static final int kJoystickPort = 0;
   private XboxController m_Controller = new XboxController(2);
+=======
+  private static final int kJoystickPort = 0;
+>>>>>>> Stashed changes
 
+/* 
   public static final int mPCM_B = 1;
   public static final int Popout = 1;
-  public static final int Popin = 1;
+  public static final int Popin = 1; */
+
+  //private XboxController m_Controller;
 
 
   //public Solenoid PopoutHoodPopout, PopoutHoodPopin;
@@ -56,8 +67,13 @@ public class Robot extends TimedRobot {
 
 
   //private SpeedController m_motor;
+<<<<<<< Updated upstream
   //private Joystick m_joystick;
   private CANSparkMax NeoShooter;
+=======
+  private Joystick m_joystick;
+  //private CANSparkMax NeoShooter;
+>>>>>>> Stashed changes
 
   public WPI_TalonFX FalconShooter;
 
@@ -71,6 +87,10 @@ public class Robot extends TimedRobot {
    FalconShooter = new WPI_TalonFX(FalconShooter_ID);
    //PopoutHoodPopout = new Solenoid(mPCM_B, Popout);
    //PopoutHoodPopin = new Solenoid(mPCM_B, Popin);
+<<<<<<< Updated upstream
+=======
+   //m_Controller = new XboxController(2);
+>>>>>>> Stashed changes
 
 
    // NeoShooter.restoreFactoryDefaults();
@@ -84,11 +104,17 @@ public class Robot extends TimedRobot {
   public void teleopPeriodic() {
     //m_motor.set(m_joystick.getY());
     //NeoShooter.set(m_joystick.getY());
-    boolean A = m_Controller.getAButton();
+/*     boolean A = m_Controller.getAButton();
     boolean stop = m_Controller.getBButton();
+<<<<<<< Updated upstream
     //boolean X = m_Controller.getXButton();
     //boolean Y = m_Controller.getYButton();
     //boolean Start = m_Controller.getStartButton();
+=======
+    boolean X = m_Controller.getXButton();
+    boolean Y = m_Controller.getYButton();
+    boolean Start = m_Controller.getStartButton(); */
+>>>>>>> Stashed changes
 /* 
     public void ExtendTray() {
       mTray_Extend.set(Constants.On);
@@ -102,7 +128,11 @@ public class Robot extends TimedRobot {
       */
   
 
+<<<<<<< Updated upstream
 /*     if (Start && Shooter_STATE == ShooterRETRACTED){
+=======
+ /*    if (Start && Shooter_STATE == ShooterRETRACTED){
+>>>>>>> Stashed changes
       PopoutHoodPopout.set(true);
       PopoutHoodPopin.set(false);
       Shooter_STATE = ShooterEXTENDED;
@@ -127,8 +157,8 @@ public class Robot extends TimedRobot {
  */
     if(stop){
       FalconShooter.set(0.0);
-    } 
-    //FalconShooter.set(m_joystick.getY());
+    }  */
+    FalconShooter.set(m_joystick.getY());
     
 
   }
